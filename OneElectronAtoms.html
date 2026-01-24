@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. One-Electron Atoms &#8212; Quantum Chemistry</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'OneElectronAtoms';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Approximate Methods for Solving One-Particle Schrödinger Equations" href="ApproximateMethods.html" />
+    <link rel="prev" title="7. Postulates of Quantum Mechanics" href="Postulates.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="main_content.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Quantum Chemistry - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Quantum Chemistry - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="main_content.html">
+                    Quantum Chemistry
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="documents/objectives.html">Detailed Learning Objectives</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="documents/GitHub.html">1. GitHub</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://qchem.qc-edu.org/problems/ghfundamentals.html">Practice: GitHub (Classroom)</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://qchem.qc-edu.org/problems/Tutorial_0.html">Practice: Schrodinger Cat Colab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jupyter.html">2. Basics of Jupyter, Python, and Programming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="problems/JupyterPythonNumpy.html">Practice: Python, Jupyter, Numpy</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://qchem.qc-edu.org/problems/tutorial_1.html">Practice: Wavefunction Normalization</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/tmQKz_xl">Extra practice: Computing Student Marks (&lt; 2022)</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://qchem.qc-edu.org/extracredit/programming.html">Extra training: Jupyter/Python/GitHub exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="History.html">3. From Newton to Schrödinger</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://www.macvideo.ca/media/1_IntroQM/1_rbe31g5b/197276683">Intro to QM video</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/presentations/1_IntroQM.pdf">Intro to QM slides+notes</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/dwsY-nra">Quiz: Demo w/ GH Classroom</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/hXNw1zoD">Quiz: QM Intro</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="SchrodingerEq.html">4. The Schrödinger Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/Sz6CquPN">Quiz: The Schrodinger Eq.</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ParticleIn1DBox.html">5. The Particle in a Box</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="x4_mocked.html">Example notebook for Moments</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/7dcqxTCt">Practice: Moments of the P-in-Box</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/i4mEherX">Practice: The Sudden Approximation</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/ccraSEtd">Quiz: 1D P-in-Box</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ParticleInMultiD.html">6. Particles confined in two and three dimensions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/xolaix2b">Practice: Effective Low-Dimensional Systems</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/d96R94xY">Practice: The Sudden Approximation in 2-D</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/AszsREQn">Practice: Interacting particles in a box</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/hGNAhgfZ">Quiz: MultiD P-in-Box</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Postulates.html">7. The Postulates of Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/Ob0ASrMA">Quiz: Applying the Postulates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">8. 1-electron atoms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/9S1quIUi">Practice: hydrogenic atoms</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ApproximateMethods.html">9. Approximate Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/g8EWPe8d">Practice: Tilted P-in-Box</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/Xo4obBPk">Practice: Gaussian Well(s)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ManyElSystems.html">10. Many-electron systems: Structure and Spectroscopy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/book/documents/2elatom.pdf">2-electron atoms</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/book/documents/atomsshort.pdf">Many-electron atoms</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/book/documents/PES.pdf">The Born-Oppenheimer Approximation</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/book/documents/molecules.pdf">Molecules</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/QC-Edu/IntroQM/blob/master/book/documents/spectroscopy.pdf">Spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://classroom.github.com/a/8CQBLG4h">Practice: Selection Rules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="HOandMorse.html">11. Diatomic Molecules' Nuclear Schrodinger Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems/huckel_theory.html">12. Hückel Theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="documents/refs.html">Reference Materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extracredit/overview.html">(Extra) Practice Problems</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://www.macvideo.ca/channel/CHEM%2B3PA3/197276683">Videos</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://classroom.github.com/a/qocaY79s">Example of buggy code</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://classroom.github.com/a/KAk_xxph">FixMe. Midterm 2</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://classroom.github.com/a/n-bmOTFz">Knowledge Test 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://classroom.github.com/a/nqLQTDnb">Knowledge Test 2</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://classroom.github.com/a/dSeemRj5">Knowledge Test 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problems/final.html">🔁 What are the eigenfunctions and eigenvalues for the following Hamiltonians.</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="problems/midterms_2025.html">Midterm Questions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="problems/midterm3.html">❓ Questions about Many-Electron Systems and their Approximation.</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing and Using</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://github-reinvite-blue.vercel.app">Re-invite to GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_of_conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/QC-Edu/IntroQM2022/blob/master/book/OneElectronAtoms.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/QC-Edu/IntroQM2022" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/QC-Edu/IntroQM2022/issues/new?title=Issue%20on%20page%20%2FOneElectronAtoms.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/OneElectronAtoms.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>One-Electron Atoms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schrodinger-equation-for-one-electron-atoms">Schrödinger Equation for One-Electron Atoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-radial-equation-for-one-electron-atoms">The Radial Equation for One-Electron Atoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenenergies-and-wavefunctions-for-one-electron-atoms">Eigenenergies and Wavefunctions for One-Electron Atoms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-expectation-value-of-r-k-for-the-l-n-1-orbital-of-a-hydrogenic-atom">📝 What is the expectation value of <span class="math notranslate nohighlight">\(r^k\)</span> for the <span class="math notranslate nohighlight">\(l=n-1\)</span> orbital of a hydrogenic atom.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-the-energy-of-the-hydrogen-atom-in-arbitrary-units-not-necessarily-atomic-units-can-be-written-as">📝 Show that the energy of the Hydrogen atom in arbitrary units (not necessarily atomic units) can be written as:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-reflection">🪞 Self-Reflection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thought-provoking-questions">🤔 Thought-Provoking Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recapitulation">🔁 Recapitulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-up">🔮 Next Up…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">📚 References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img alt="5f+1 orbital" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Hydrogen_eigenstate_n5_l3_m1.png/1024px-Hydrogen_eigenstate_n5_l3_m1.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="one-electron-atoms">
+<h1><span class="section-number">8. </span>One-Electron Atoms<a class="headerlink" href="#one-electron-atoms" title="Link to this heading">#</a></h1>
+<p>Just as the touchstone of chemistry is the periodic table, the touchstone of quantum chemistry is the atomic wavefunction. As we shall see, our intuition about many-electron atoms is built up from our knowledge of 1-electron atoms, mainly because many-electron atoms are mathematically intractable, while 1-electron atoms are not appreciably more complicated than an electron confined to a spherical ball. A detailed mathematical exposition on 1-electron atoms–which are often called hydrogenic atoms–is provided as a <a class="reference external" href="https://github.com/QC-Edu/IntroQM2022/blob/master/book/documents/Hatom.pdf">pdf</a>. This is only a brief summary.</p>
+<section id="schrodinger-equation-for-one-electron-atoms">
+<h2>Schrödinger Equation for One-Electron Atoms<a class="headerlink" href="#schrodinger-equation-for-one-electron-atoms" title="Link to this heading">#</a></h2>
+<p>Denoting the mass of the electron as <span class="math notranslate nohighlight">\(m_e\)</span>, the charge of the electron as <span class="math notranslate nohighlight">\(=e\)</span>, and the <a class="reference external" href="https://en.wikipedia.org/wiki/Vacuum_permittivity">permittivity of free space</a> as <span class="math notranslate nohighlight">\(\epsilon_0\)</span>, the Hamiltonian for the attraction of an electron to a atomic nucleus with atomic number <span class="math notranslate nohighlight">\(Z\)</span> (and charge <span class="math notranslate nohighlight">\(+Ze\)</span>) at the origin, <span class="math notranslate nohighlight">\((x,y,z) = (0,0,0)\)</span>, is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}_{\text{1 el. atom}} = -\frac{\hbar^2}{2m_e} \nabla^2 - \frac{Z e^2}{4 \pi \epsilon_0 r}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(r = \sqrt{x^2+y^2+z^2}\)</span> is the distance of the electron from the nucleus. In <a class="reference external" href="https://en.wikipedia.org/wiki/Hartree_atomic_units">atomic units</a>, the Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{H}_{\text{1 el. atom}} = -\tfrac{1}{2} \nabla^2 - Zr^{-1}
+\]</div>
+<p>Just as we did for the electron confined to a spherical ball, we rewrite the Schrödinger equation in spherical coordinates,</p>
+<div class="math notranslate nohighlight">
+\[
+\left(-\frac{1}{2} \left( \frac{d^2}{dr^2}
++ \frac{2}{r} \frac{d}{dr}\right) 
+      + \frac{\hat{L}^2}{2r^2} - \frac{Z}{r} \right)
+      \psi_{n,l,m_l}(r,\theta,\phi) 
+= E_{n,l,m_l}\psi_{n,l,m_l}(r,\theta,\phi)
+\]</div>
+<p>and use the fact the eigenvalues of the squared-magnitude of the angular momentum, <span class="math notranslate nohighlight">\(\hat{L}^2\)</span> are the <a class="reference external" href="https://en.wikipedia.org/wiki/Spherical_harmonics">spherical harmonics</a></p>
+<div class="math notranslate nohighlight">
+\[
+\hat{L}^2 Y_l^{m} (\theta, \phi) = l(l+1)Y_l^{m} (\theta, \phi) \qquad l=0,1,2,\ldots m=0, \pm 1, \ldots, \pm l
+\]</div>
+<p>and the technique of separation of variables to deduce that the wavefunctions of one-electron atoms have the form</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_{n,l,m}(r,\theta,\phi) = R_{n,l}(r) Y_l^{m}(\theta,\phi) 
+\]</div>
+<p>where the radial wavefunction, <span class="math notranslate nohighlight">\(R_{n,l}(r)\)</span> is obtained by solving the radial Schrödinger equation</p>
+<div class="math notranslate nohighlight">
+\[
+\left(-\frac{1}{2} \left( \frac{d^2}{dr^2}
++ \frac{2}{r} \frac{d}{dr}\right) 
+      + \frac{l(l+1)}{2r^2} - \frac{Z}{r} \right)
+      R_{n,l}(r) 
+= E_{n,l}R_{n,l}(r)
+\]</div>
+</section>
+<section id="the-radial-equation-for-one-electron-atoms">
+<h2>The Radial Equation for One-Electron Atoms<a class="headerlink" href="#the-radial-equation-for-one-electron-atoms" title="Link to this heading">#</a></h2>
+<p>To solve the radial Schrödinger equation, we rewrite it as a <a class="reference external" href="https://en.wikipedia.org/wiki/Homogeneous_differential_equation">homogeneous linear differential equation</a></p>
+<div class="math notranslate nohighlight">
+\[
+\left( \frac{d^2}{dr^2}
++ \frac{2}{r} \frac{d}{dr}
+      - \frac{l(l+1)}{r^2} + \frac{2Z}{r} + 2E_{n,l}\right)
+      R_{n,l}(r) = 0
+\]</div>
+<p>It is (quite a bit) more involved than the previous cases we have considered, but the same basic technique reveals that the eigenenergies are</p>
+<div class="math notranslate nohighlight">
+\[
+E_n = -\frac{Z^2}{2n^2}
+\]</div>
+<p>and the radial wavefunctions are the product of an <a class="reference external" href="https://en.wikipedia.org/wiki/Laguerre_polynomials#Generalized_Laguerre_polynomials">associated Laguerre polynomial</a> and an exponential,</p>
+<div class="math notranslate nohighlight">
+\[
+R_{n,l}(r) \propto \left(\frac{2Zr}{n}\right)^l L_{n-1-l}^{2l+1}\left(\frac{2Zr}{n}\right) e^{-\frac{Zr}{n}}
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+n=1,2,3,\ldots \\
+l=0,1,\ldots,n-1 \\
+m = 0,\pm 1, \pm2, \ldots, \pm l
+\end{split}\]</div>
+<p><img alt="Hydrogenic orbitals" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Atomic_orbitals_n1234_m-eigenstates.png" /></p>
+</section>
+<section id="eigenenergies-and-wavefunctions-for-one-electron-atoms">
+<h2>Eigenenergies and Wavefunctions for One-Electron Atoms<a class="headerlink" href="#eigenenergies-and-wavefunctions-for-one-electron-atoms" title="Link to this heading">#</a></h2>
+<p>The eigenenergies of the Hydrogenic wavefunctions do not depend on <span class="math notranslate nohighlight">\(m\)</span> or <span class="math notranslate nohighlight">\(l\)</span>. So there are <span class="math notranslate nohighlight">\((n+1)^2\)</span> degenerate eigenfunctions, with energies</p>
+<div class="math notranslate nohighlight">
+\[
+E_n = -\frac{Z^2}{2n^2}
+\]</div>
+<p>The energy eigenfunctions are:</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_{nlm}(r,\theta,\phi) \propto \left(\frac{2Zr}{n}\right)^l L_{n-1-l}^{2l+1}\left(\frac{2Zr}{n}\right) e^{-\frac{Zr}{n}}  Y_l^{m} (\theta, \phi)
+\]</div>
+<p>These eigenfunctions are complex-valued, because the spherical harmonics are complex-valued. Like all other one-electron wavefunctions, these eigenfunctions are referred to as <em>orbitals</em>. For historical reasons, orbitals are labelled by their principle quantum number <span class="math notranslate nohighlight">\(n\)</span> (which specifies their energy), their total angular momentum quantum number <span class="math notranslate nohighlight">\(l\)</span>, and the quantum number that specifies their angular momentum around the <span class="math notranslate nohighlight">\(z\)</span> axis, <span class="math notranslate nohighlight">\(m\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{L}_z Y_l^{m} (\theta, \phi) = \hbar m Y_l^{m} (\theta, \phi)
+\]</div>
+<p>The <span class="math notranslate nohighlight">\(l\)</span> quantum number is stored by a letter code that dates back to the pre-history of quantum mechanics, where certain spectral lines were labelled as <strong>s</strong>harp (<span class="math notranslate nohighlight">\(l=0\)</span> indicated no spatial degeneracy that could be broken by an external field), <strong>p</strong>rinciple (<span class="math notranslate nohighlight">\(l=1\)</span> lines were still relatively sharp), <strong>d</strong>iffuse (<span class="math notranslate nohighlight">\(l=2\)</span> lines were quite diffuse due to the 5-fold degeneracy of d orbitals), and <strong>f</strong>undamental (<span class="math notranslate nohighlight">\(l=3\)</span>).</p>
+<p>Note that the orbital images that appear above do not look that much like the usual orbital pictures, with the exception of the <span class="math notranslate nohighlight">\(m=0\)</span> orbitals. This is because of the complex-valuedness. We often instead use the <em>real</em> spherical harmonics, which are defined simply as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+S_l^{m&gt;0}(\theta,\phi) &amp;= \frac{1}{\sqrt{2}} \left(Y_l^{-m} (\theta, \phi) + (-1)^{m} Y_l^{m} (\theta, \phi) \right) \\
+S_l^{m=0}(\theta,\phi) &amp;= Y_l^{m=0} (\theta, \phi) \\
+S_l^{m&lt;0}(\theta,\phi) &amp;= \frac{i}{\sqrt{2}} \left(Y_l^{-m} (\theta, \phi) - (-1)^{m} Y_l^{m} (\theta, \phi) \right) 
+\end{align}
+\end{split}\]</div>
+<p>The following animations shows one can take linear combinations of the (complex) spherical harmonics to form the <span class="math notranslate nohighlight">\(p_x\)</span>, <span class="math notranslate nohighlight">\(p_y\)</span>, etc. orbitals one generally uses in chemistry.</p>
+<p><img alt="animation of 2p orbital" src="https://github.com/PaulWAyers/IntroQChem/blob/main/linkedFiles/Orbital_p1-px_animation.gif?raw=true" /></p>
+<p><img alt="animation of 3p orbital" src="https://github.com/PaulWAyers/IntroQChem/blob/main/linkedFiles/Orbital_3p1-3px_animation.gif?raw=true" /></p>
+<p>Most orbitals have very complicated formulas, but a few have simple equations, including:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\psi_{\text{1s}}(r) = \psi_{100}(r) = \sqrt{\frac{Z^3}{\pi}}e^{-Zr}  \\
+\psi_{n,n-1,m} \propto r^{n-1} e^{\tfrac{-Zr}{n}} Y_l^{m_l} (\theta,\phi)
+\end{split}\]</div>
+<section id="what-is-the-expectation-value-of-r-k-for-the-l-n-1-orbital-of-a-hydrogenic-atom">
+<h3>📝 What is the expectation value of <span class="math notranslate nohighlight">\(r^k\)</span> for the <span class="math notranslate nohighlight">\(l=n-1\)</span> orbital of a hydrogenic atom.<a class="headerlink" href="#what-is-the-expectation-value-of-r-k-for-the-l-n-1-orbital-of-a-hydrogenic-atom" title="Link to this heading">#</a></h3>
+</section>
+<section id="show-that-the-energy-of-the-hydrogen-atom-in-arbitrary-units-not-necessarily-atomic-units-can-be-written-as">
+<h3>📝 Show that the energy of the Hydrogen atom in arbitrary units (not necessarily atomic units) can be written as:<a class="headerlink" href="#show-that-the-energy-of-the-hydrogen-atom-in-arbitrary-units-not-necessarily-atomic-units-can-be-written-as" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+E_n = -\frac{Z^2}{2n^2} \cdot \left(\frac{e^2}{4 \pi \epsilon_0}\right)^2 \cdot \left( \frac{m_e}{\hbar^2}\right)
+\]</div>
+</section>
+</section>
+<section id="self-reflection">
+<h2>🪞 Self-Reflection<a class="headerlink" href="#self-reflection" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Using the conversion from atomic units to traditional chemical units of kJ/mol, what is the energy of the Hydrogen atom? How accurately, in atomic units, must one determine the energy of a one-electron atom in order to attain “chemical accuracy” of ~1 kJ/mol?</p></li>
+<li><p>Write a small Python script to evaluate the expectation value of the radius, <span class="math notranslate nohighlight">\(r\)</span>, for a one-electron atom.</p></li>
+<li><p>Test to confirm that the Heisenberg uncertainty principle for position and momentum holds for the ground state of a Hydrogenic atom.</p></li>
+<li><p>To what extent is the shape of the spherical harmonic intuitive, especially the doughnut shapes associated with an electron’s angular momentum around the z axis.</p></li>
+</ul>
+</section>
+<section id="thought-provoking-questions">
+<h2>🤔 Thought-Provoking Questions<a class="headerlink" href="#thought-provoking-questions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In one-electron atoms, the eigenenergies depend only on the principle quantum number, <span class="math notranslate nohighlight">\(n\)</span>, and not the angular momentum quantum number, <span class="math notranslate nohighlight">\(l\)</span>. Why are <span class="math notranslate nohighlight">\(s\)</span> orbitals lower in energy than <span class="math notranslate nohighlight">\(p\)</span> orbitals in real multielectron atoms, but not one-electron atoms? It turns out this is <em>not</em> an accidental degeneracy, but a hidden symmetry of the Hydrogen atom.</p></li>
+<li><p>Suppose electrons did not repel each other. Can you write the wavefunction for a many-electron atom in that case?</p></li>
+<li><p>Why do you think solving the Schrödinger equation for the one-electron molecule is more complicated than solving the Schrödinger equation for the one-electron atom?</p></li>
+<li><p>For what <span class="math notranslate nohighlight">\(Z\)</span> is the energy of a one-electron atom comparable to the rest-mass energy of an electron, <span class="math notranslate nohighlight">\(mc^2\)</span>? For atomic numbers close to this value, relativistic effects become extremely important.</p></li>
+<li><p>The Kratzer-Fues potential, <span class="math notranslate nohighlight">\(V_{\text{Kratzer-Fues}}(r) = \frac{a}{r^2} - \frac{b}{r}\)</span> (here <span class="math notranslate nohighlight">\(a&gt;0\)</span> and <span class="math notranslate nohighlight">\(b&gt;0\)</span>) is a reasonable model for a diatomic molecule rotating and vibrating in 3 dimensions, or even a ion-pair complex (e.g., an single ion pair from an ionic solvent in the gas phase). What are the solutions to the Schrödinger equation for the Kratzer-Fues potential? <a class="reference internal" href="problems/KratzerFues.html"><span class="std std-doc">Solution</span></a></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\left(-\frac{\hbar^2}{2m}\nabla^2 +\frac{a}{r^2} - \frac{b}{r} \right) \psi(\mathbf{r}) = E\psi(\mathbf{r}) 
+\]</div>
+</section>
+<section id="recapitulation">
+<h2>🔁 Recapitulation<a class="headerlink" href="#recapitulation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>What are eigenfunctions for the <span class="math notranslate nohighlight">\(n=l+1\)</span> state of a one-electron atom?</p></li>
+<li><p>What are the energy eigenfunctions and eigenvalues for a one-electron atom?</p></li>
+<li><p>How does the energy increase as the atomic number increases?</p></li>
+</ul>
+</section>
+<section id="next-up">
+<h2>🔮 Next Up…<a class="headerlink" href="#next-up" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Multielectron systems</p></li>
+<li><p>Approximate methods.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>📚 References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>My favorite sources for this material are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/PaulWAyers/IntroQChem/blob/main/documents/DumontBook.pdf?raw=true">Randy’s book</a></p></li>
+<li><p>D. A. MacQuarrie, Quantum Chemistry (University Science Books, Mill Valley California, 1983)</p></li>
+<li><p><a class="reference external" href="https://github.com/PaulWAyers/IntroQChem/blob/main/documents/Hatom.pdf?raw=true">One-electron atoms</a> (my notes).</p></li>
+<li><p><a class="reference external" href="https://dpotoyan.github.io/Chem324/ch05/note01.html">Davit Potoyan’s Jupyterbook course</a>.</p></li>
+<li><p>It isn’t active anymore, but the <a class="reference external" href="https://winter.group.shef.ac.uk/orbitron/atomic_orbitals/7i/index.html">orbitron</a> let one visualize the (real, Cartesian) spherical harmonics and the <a class="reference external" href="https://winter.group.shef.ac.uk/orbitron/atomic_orbitals/7f/7f_wave_function.html">radial wavefunctions</a> for hydrogenic orbitals. I’m leaving the link here hoping that it, or something similar, becomes available.</p></li>
+</ul>
+<p>There are also some excellent wikipedia articles:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Hydrogen-like_atom">Hydrogen-like atoms</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Atomic_orbital">Atomic orbitals</a></p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "QC-Edu/IntroQM2022",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Postulates.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Postulates of Quantum Mechanics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ApproximateMethods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Approximate Methods for Solving One-Particle Schrödinger Equations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schrodinger-equation-for-one-electron-atoms">Schrödinger Equation for One-Electron Atoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-radial-equation-for-one-electron-atoms">The Radial Equation for One-Electron Atoms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenenergies-and-wavefunctions-for-one-electron-atoms">Eigenenergies and Wavefunctions for One-Electron Atoms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-expectation-value-of-r-k-for-the-l-n-1-orbital-of-a-hydrogenic-atom">📝 What is the expectation value of <span class="math notranslate nohighlight">\(r^k\)</span> for the <span class="math notranslate nohighlight">\(l=n-1\)</span> orbital of a hydrogenic atom.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-that-the-energy-of-the-hydrogen-atom-in-arbitrary-units-not-necessarily-atomic-units-can-be-written-as">📝 Show that the energy of the Hydrogen atom in arbitrary units (not necessarily atomic units) can be written as:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-reflection">🪞 Self-Reflection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thought-provoking-questions">🤔 Thought-Provoking Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recapitulation">🔁 Recapitulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-up">🔮 Next Up…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">📚 References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Paul W. Ayers, Valerii Chuiko, and friends, with the support of The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
